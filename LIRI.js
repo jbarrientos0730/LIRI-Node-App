@@ -63,6 +63,7 @@ fs.readFile(filename, 'utf8', function(err, data) {
   if (err) throw err;
   console.log('OK: ' + filename);
   console.log(data)
+  //Need to figure out how to pass the text as arguements.
 });
 }
 else{
