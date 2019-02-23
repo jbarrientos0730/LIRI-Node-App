@@ -41,12 +41,31 @@ else if(search == "spotify-this-song"){
   });
 }
 else if(search == "movie-this"){
+  term = process.argv.slice(3).join("+");
+  axios.get("http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=d5093d08")
+  .then(
+  function(response) {
+    console.log("Movie Title: " + response.data.Title);
+    console.log("Release Year: " + response.data.Year);
+    console.log("The movie's IMDB rating is: " + response.data.imdbRating);
+    console.log("The movie's Rotten Tomatoes rating is: " + response.data.Ratings[2].Value);
+    console.log("Producing Country: " + response.data.Country);
+    console.log("Movie Language: " + response.data.Language);
+    console.log("The movie's Plot: " + response.data.Plot);
+    console.log("The movie's Actors: " + response.data.Actors);
+  });
 
 }
 else if(search == "do-what-it-says"){
-
+  var fs = require('fs')
+  , filename = process.argv[3];
+fs.readFile(filename, 'utf8', function(err, data) {
+  if (err) throw err;
+  console.log('OK: ' + filename);
+  console.log(data)
+});
 }
 else{
-    console.log("Error. Please input command with no spaces and '-' between each word.")
+    console.log("Error. Please input command with no spaces and '-' between each word. Available commands: concert-this, spotify-this-song, movie-this, and do-what-it-says")
 }
 
